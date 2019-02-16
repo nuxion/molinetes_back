@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# config files
+instance/
+
+# C extensions
+*.so
+
+# vim
+*.swp
