@@ -2,7 +2,7 @@
 to: test/conftest.py
 ---
 import pytest
-from <%= dir_name %> import create_app
+from <%= h.package %> import create_app
 
 @pytest.fixture(scope='module')
 def test_client():

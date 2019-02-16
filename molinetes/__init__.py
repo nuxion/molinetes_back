@@ -21,13 +21,14 @@ def create_app(test_config=None):
     return app
 
 def load_routes(app):
-    from . import root
-    #import pdb; pdb.set_trace()
-    # add routes
-
     prefix = app.config['URL_PREFIX']
 
+    from . import root
     app.register_blueprint(root.bp, url_prefix='{}'.format(prefix))
+
+    # add_routes # don't delete
+
+
 
 
 
