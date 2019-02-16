@@ -1,6 +1,6 @@
-___
-to: <%= h.package %>/<%= name %>/routes.py
-___
+---
+to: <%=h.package%>/<%=name%>/routes.py
+---
 from flask import (
     Blueprint, g, redirect, request, session, url_for, jsonify )
 
