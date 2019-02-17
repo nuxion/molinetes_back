@@ -36,3 +36,6 @@ def load_routes(app):
     app.register_blueprint(root.bp, url_prefix='{}'.format(prefix))
 
     # add_routes # don't delete
+    from . import credenciales
+    app.register_blueprint(credenciales.bp, url_prefix='{}'.format(prefix))
+
