@@ -14,6 +14,13 @@ Second:
 python3 runweb.py
 
 ```
+
+or
+
+```
+env FLASK_APP="molinetes:create_app()" flask run
+```
+
 ## Create a new resource ##
 
 This command creates a new resource  with a simple test file.
