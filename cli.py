@@ -3,7 +3,7 @@
 #
 import os
 from molinetes import create_app
-from molinetes.models import db, Credencial
+from molinetes.models import db, Evento, Molinete, Credencial
 from flask_migrate import Migrate
 
 app = create_app()
@@ -14,7 +14,9 @@ migrate = Migrate(app, db)
 def make_shell_context():
     return dict(app=app,
                 db=db,
-                Credencial=Credencial
+                Credencial=Credencial,
+                Evento=Evento,
+                Molinete=Molinete
                 )
 
 

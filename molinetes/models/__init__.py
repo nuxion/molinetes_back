@@ -4,3 +4,5 @@ db = SQLAlchemy()
 
 ## models shortcuts for direct import
 from .credenciales import Credencial
+from .eventos import Evento
+from .molinetes import Molinete
