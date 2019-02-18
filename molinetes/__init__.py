@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_cors import CORS, cross_origin
 #from flask_sqlalchemy import SQLAlchemy
 from .models import db
 
@@ -12,7 +13,7 @@ def create_app(test_config=None):
 
     app.config.from_mapping(
         SECRET_KEY = 'dev',
-        URL_PREFIX = '/',
+        URL_PREFIX = '/api/v1/',
         SQLALCHEMY_DATABASE_URI = 'sqlite:///{}/dev.db'\
         .format(app.instance_path),
         SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -23,8 +24,8 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
+    cors = CORS(app)
     db.init_app(app)
-
     load_routes(app)
 
     return app

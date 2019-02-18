@@ -6,10 +6,13 @@ from molinetes.models import db, Credencial
 
 @pytest.fixture(scope='module')
 def test_client():
+    pytest.url_prefix = '/api/v1'
+
     flask_app = create_app({
         'TESTING': True,
         'SQLALCHEMY_DATABASE_URI' : 'sqlite:///test.db',
-        'SQLALCHEMY_TRACK_MODIFICATIONS' : False
+        'SQLALCHEMY_TRACK_MODIFICATIONS' : False,
+        'URL_PREFIX': pytest.url_prefix
     })
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/test.db'\
         .format(flask_app.instance_path)
