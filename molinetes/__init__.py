@@ -3,7 +3,7 @@ from flask import Flask
 #from flask_sqlalchemy import SQLAlchemy
 from .models import db
 
-__version__ = '0.1.dev'
+__version__ = '0.2.dev'
 
 #db = SQLAlchemy()
 
@@ -36,6 +36,12 @@ def load_routes(app):
     app.register_blueprint(root.bp, url_prefix='{}'.format(prefix))
 
     # add_routes # don't delete
+    from . import molinetes
+    app.register_blueprint(molinetes.bp, url_prefix='{}'.format(prefix))
+
+    from . import eventos
+    app.register_blueprint(eventos.bp, url_prefix='{}'.format(prefix))
+
     from . import credenciales
     app.register_blueprint(credenciales.bp, url_prefix='{}'.format(prefix))
 
