@@ -7,3 +7,4 @@ from .credenciales import Credencial
 from .eventos import Evento
 from .molinetes import Molinete
 from .lecturas import Lectura
+from .users import User, Rol
