@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
 #from flask_sqlalchemy import SQLAlchemy
 from .models import db
@@ -28,6 +28,10 @@ def create_app(test_config=None):
     db.init_app(app)
     load_routes(app)
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return jsonify(error=404, text=str(e)), 404
+
     return app
 
 def load_routes(app):
@@ -37,6 +41,12 @@ def load_routes(app):
     app.register_blueprint(root.bp, url_prefix='{}'.format(prefix))
 
     # add_routes # don't delete
+    from . import lecturas
+    app.register_blueprint(lecturas.bp, url_prefix='{}'.format(prefix))
+
+    from . import actions
+    app.register_blueprint(actions.bp, url_prefix='{}'.format(prefix))
+
     from . import molinetes
     app.register_blueprint(molinetes.bp, url_prefix='{}'.format(prefix))
 
