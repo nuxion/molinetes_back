@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
 #from flask_sqlalchemy import SQLAlchemy
 from .models import db
+from .auth import jwt
 
 __version__ = '0.2.dev'
 
@@ -26,6 +27,7 @@ def create_app(test_config=None):
 
     cors = CORS(app)
     db.init_app(app)
+    jwt.init_app(app)
     load_routes(app)
 
     @app.errorhandler(404)

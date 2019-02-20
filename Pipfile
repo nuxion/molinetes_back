@@ -13,6 +13,7 @@ psycopg2 = "*"
 flask-migrate = "*"
 flask-cors = "*"
 pyjwt = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.6"

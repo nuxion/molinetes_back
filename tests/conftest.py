@@ -12,7 +12,8 @@ def test_client():
         'TESTING': True,
         'SQLALCHEMY_DATABASE_URI' : 'sqlite:///test.db',
         'SQLALCHEMY_TRACK_MODIFICATIONS' : False,
-        'URL_PREFIX': pytest.url_prefix
+        'URL_PREFIX': pytest.url_prefix,
+        'SECRET_KEY': 'testing'
     })
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/test.db'\
         .format(flask_app.instance_path)
