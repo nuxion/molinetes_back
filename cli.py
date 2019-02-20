@@ -4,7 +4,7 @@
 import os
 import click
 from molinetes import create_app
-from molinetes.models import db, Evento, Molinete, Credencial
+from molinetes.models import db, Evento, Molinete, Credencial, User
 from flask_migrate import Migrate
 
 app = create_app()
@@ -17,7 +17,8 @@ def make_shell_context():
                 db=db,
                 Credencial=Credencial,
                 Evento=Evento,
-                Molinete=Molinete
+                Molinete=Molinete,
+                User=User
                 )
 
 @app.cli.command()
@@ -38,6 +39,10 @@ def populate_db():
     db.session.add(Molinete(evento_cod='20180701'))
     db.session.add(Molinete(evento_cod='20180701'))
     db.session.add(Molinete(evento_cod='20170701'))
+    db.session.commit()
+
+    # Crea un usuario
+    db.session.add(User(email='dev@dev.com', name='dev', password='dev'))
     db.session.commit()
 
 

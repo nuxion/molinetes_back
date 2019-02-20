@@ -1,6 +1,6 @@
 import pytest
 from molinetes import create_app
-from molinetes.models import db, Credencial
+from molinetes.models import db, Credencial, User
 
 
 
@@ -39,6 +39,9 @@ def init_db():
     # Commit the changes for the users
     db.session.commit()
 
+    u = User(email="test@test.com", password="test")
+    db.session.add(u)
+    db.session.commit()
     yield db  # this is where the testing happens!
 
     db.drop_all()
