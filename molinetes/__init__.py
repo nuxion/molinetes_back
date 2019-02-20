@@ -53,7 +53,8 @@ def load_routes(app):
     app.register_blueprint(lecturas.bp, url_prefix='{}'.format(prefix))
 
     from . import actions
-    app.register_blueprint(actions.bp, url_prefix='{}'.format(prefix))
+    app.register_blueprint(actions.bp,
+                           url_prefix='{}actions'.format(prefix))
 
     from . import molinetes
     app.register_blueprint(molinetes.bp, url_prefix='{}'.format(prefix))

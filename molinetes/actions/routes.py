@@ -2,9 +2,9 @@ from flask import (
     Blueprint, g, redirect, request, session, url_for, jsonify )
 from molinetes.models import Lectura, db
 
-bp = Blueprint('actions', __name__)
+bp = Blueprint('actions', __name__, url_prefix='actions')
 
-@bp.route('/actions/register', strict_slashes=False, methods=['POST'])
+@bp.route('/register', strict_slashes=False, methods=['POST'])
 def register():
 
     if request.is_json:
