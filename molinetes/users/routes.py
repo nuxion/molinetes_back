@@ -6,23 +6,12 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 bp = Blueprint('users', __name__)
 
-def make_dict(item):
-    _dict = {
-        'id': item.id,
-        'email': item.email,
-        'name': item.name,
-        'rol_id': item.rol_id
-    }
-    return _dict
-
-
-
 @bp.route('/users', strict_slashes=False, methods=['GET'])
 def list_all():
     status = 200
     users = Users.find_all()
     if users:
-        msg = list(map(make_dict, users))
+        msg = { 'msg': users }
     else:
         status= 204
         msg = {'msg': 'empty'}
@@ -41,7 +30,7 @@ def login():
     if not password:
         return jsonify({ 'msg': 'Missing password param'}), 400
 
-    if validate_credentials(email, password):
+    if Users.validate_credentials(email, password):
         access_token = create_access_token(identity=email)
         return jsonify(access_token=access_token), 200
     else:
