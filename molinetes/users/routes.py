@@ -9,7 +9,6 @@ def make_dict(item):
         'id': item.id,
         'email': item.email,
         'name': item.name,
-        'password': item.password,
         'rol_id': item.rol_id
     }
     return _dict
