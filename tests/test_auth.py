@@ -1,8 +1,10 @@
 import pytest
 
+
 @pytest.fixture(scope='module')
 def token(test_client, init_db):
-    url = '{}/actions/login'.format(pytest.url_prefix)
+    endpoint = '{}/users'.format(pytest.url_prefix)
+    url = '{}/login'.format(endpoint)
     response = test_client.post(url, json={
         'email': 'test@test.com', 'password': 'test'
     })
@@ -15,7 +17,8 @@ def test_auth_login(test_client, init_db):
     GIVEN a flask app
     WHEN the '/auth' page is requested
     """
-    url = '{}/actions/login'.format(pytest.url_prefix)
+    endpoint = '{}/users'.format(pytest.url_prefix)
+    url = '{}/login'.format(endpoint)
     response = test_client.post(url, json={
         'email': 'test@test.com', 'password': 'test'
     })
@@ -28,7 +31,8 @@ def test_auth_login(test_client, init_db):
     assert exist == True
 
 def test_token(test_client, init_db, token):
-    url = '{}/actions/testlogin'.format(pytest.url_prefix)
+    endpoint = '{}/users'.format(pytest.url_prefix)
+    url = '{}/login'.format(endpoint)
     headers =  { 'Authorization' : 'Bearer {}'.format(token) }
     response = test_client.get(url, headers=headers)
 

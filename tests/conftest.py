@@ -6,7 +6,8 @@ sys.path.insert(0,
                 os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from molinetes import create_app
-from molinetes.models import db, Credencial, User
+from molinetes.models import Credencial, User
+from molinetes.ext.sql import db
 
 
 
