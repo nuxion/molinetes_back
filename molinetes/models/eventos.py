@@ -1,5 +1,4 @@
-#from molinetes.models import db
-from . import db
+from molinetes.ext.sql import db
 
 class Evento(db.Model):
     id = db.Column(db.Integer, primary_key=True)

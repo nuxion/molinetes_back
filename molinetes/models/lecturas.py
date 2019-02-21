@@ -1,4 +1,4 @@
-from . import db
+from molinetes.ext.sql import db
 from datetime import datetime
 
 class Lectura(db.Model):

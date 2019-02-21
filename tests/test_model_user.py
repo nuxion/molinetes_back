@@ -1,5 +1,5 @@
 import pytest
-from molinetes.models import User, db
+from molinetes.models import User
 
 def test_create_user(test_client, init_db):
 
@@ -7,13 +7,13 @@ def test_create_user(test_client, init_db):
                 name="nuxion",
                 password="test")
 
-    db.session.add(user);
-    db.session.commit()
+    init_db.session.add(user);
+    init_db.session.commit()
 
     users = User.query.all()
 
-    assert len(users) == 1
-    assert users[0].password != 'test'
+    assert len(users) == 2
+    assert users[1].password != 'test'
 
 def test_create_duplicate(test_client, init_db):
 
@@ -21,11 +21,11 @@ def test_create_duplicate(test_client, init_db):
                 name="nuxion",
                 password="test")
 
-    db.session.add(user);
+    init_db.session.add(user);
     with pytest.raises(Exception):
-        db.session.commit()
+        init_db.session.commit()
 
-    db.session.rollback()
+    init_db.session.rollback()
     users = User.query.all()
 
-    assert len(users) == 1
+    assert len(users) == 2

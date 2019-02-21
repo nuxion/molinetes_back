@@ -1,4 +1,4 @@
-from . import db
+from molinetes.ext.sql import db
 
 class Credencial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
