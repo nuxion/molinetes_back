@@ -18,7 +18,7 @@ def list_all():
 
     return jsonify(msg), status
 
-@bp.route('/users/login', strict_slashes=False, methods=['POST'])
+@bp.route('/users/_login', methods=['POST'])
 def login():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
@@ -35,5 +35,20 @@ def login():
         return jsonify(access_token=access_token), 200
     else:
         return jsonify({"msg": "Bad username or password"}), 401
+
+@bp.route('/users/_logout', methods=['POST'])
+@jwt_required
+def logout():
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+
+    email = request.json.get('email', None)
+    current_user = get_jwt_identity()
+    if current_user == email:
+        return jsonify(msg="{} logout".format(current_user)), 200
+    else:
+        return jsonify(msg='bad data'), 401
+
+
 
 

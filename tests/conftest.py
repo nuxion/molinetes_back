@@ -10,16 +10,18 @@ from molinetes.models import Credencial, User
 from molinetes.ext.sql import db
 
 
-
 @pytest.fixture(scope='module')
 def test_client():
-    pytest.url_prefix = '/api/v1'
+
+    url_prefix = '/api/v1'
+    pytest.routes = {
+        'users': '{}/users'.format(url_prefix),
+    }
 
     flask_app = create_app({
         'TESTING': True,
-        'SQLALCHEMY_DATABASE_URI' : 'sqlite:///test.db',
         'SQLALCHEMY_TRACK_MODIFICATIONS' : False,
-        'URL_PREFIX': pytest.url_prefix,
+        'URL_PREFIX': url_prefix,
         'SECRET_KEY': 'testing'
     })
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}/test.db'\
@@ -31,6 +33,17 @@ def test_client():
     yield testing_client
 
     ctx.pop()
+
+@pytest.fixture(scope='module')
+def token_access(test_client):
+    url = '{}/_login'.format(pytest.routes['users'])
+    response = test_client.post(url, json={
+        'email': 'test@test.com', 'password': 'test'
+    })
+    token = response.json.get('access_token')
+    print (token)
+
+    yield token
 
 @pytest.fixture(scope='module')
 def init_db():
