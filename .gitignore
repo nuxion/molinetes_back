@@ -11,4 +11,5 @@ instance/
 *.so
 
 # vim
-*.swp
+*.swp 
+.turnstilesback
